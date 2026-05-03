@@ -223,7 +223,7 @@ export default function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          service_id: 'service_cf8pw7m',
+          service_id: 'service_y2v49xw',
           template_id: 'template_j9tysx9',
           user_id: 'QkkS6i-DHKlSdulJH',
           template_params: {
