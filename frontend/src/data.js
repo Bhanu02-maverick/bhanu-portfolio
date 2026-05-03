@@ -9,7 +9,7 @@ export const data = {
   social: {
     github: 'https://github.com/Bhanu02-maverick',
     linkedin: 'https://linkedin.com/in/M-BHANU-TEJA',
-    leetcode: 'https://leetcode.com/M_BhanuTeja',
+    leetcode: 'https://leetcode.com/u/Chaturya_BT/',
     hackerrank: 'https://hackerrank.com/bhanu',
   },
 
