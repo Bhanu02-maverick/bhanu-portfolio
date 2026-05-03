@@ -106,7 +106,7 @@ export default function Home() {
                       <p className="text-slate-500 text-xs">Internships</p>
                     </div>
                   </div>
-                  <a href="mailto:bhanuteja766192@gmail.com" className="btn-primary w-full justify-center text-sm py-2">
+                  <a href="/Bhanu_Teja_Resume.pdf" className="btn-primary w-full justify-center text-sm py-2">
                     <Download size={14} /> Download CV
                   </a>
                 </div>
