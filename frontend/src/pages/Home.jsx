@@ -1,192 +1,257 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Linkedin, MapPin, Download, Zap, Star } from 'lucide-react';
+import {
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  BrainCircuit,
+  Code2,
+  Download,
+  ExternalLink,
+  Github,
+  Linkedin,
+  MapPin,
+  Rocket,
+  ShieldCheck,
+  Trophy,
+} from 'lucide-react';
 import { data } from '../data';
 import { useReveal } from '../hooks/useReveal';
 
 function FadeUp({ children, delay = 0, className = '' }) {
   const { ref, inView } = useReveal();
   return (
-    <div ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}>
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
 }
 
+const serviceIcons = [Code2, BrainCircuit, ShieldCheck];
+
 export default function Home() {
-  const topSkills = ['React.js', 'Node.js', 'Python', 'TensorFlow', 'AWS', 'MongoDB'];
+  const featuredProjects = data.projects.slice(0, 3);
 
   return (
-    <main className="pt-28 pb-16">
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 min-h-[80vh] flex items-center">
-        <div className="w-full">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-20">
-            <div className="flex-1 space-y-6">
-              <FadeUp delay={0}>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-slow" />
-                  <span className="text-green-400 text-sm font-mono">Available for opportunities</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-500 text-sm font-body">
-                  <MapPin size={14} />
-                  <span>{data.location}</span>
-                </div>
-              </FadeUp>
+    <main className="overflow-hidden">
+      <section className="hero-surface relative min-h-screen px-6 pt-28 pb-20">
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="hero-weave absolute inset-0" />
+          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#080a0f] to-transparent" />
+        </div>
 
-              <FadeUp delay={100}>
-                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-                  <span className="gradient-text">{data.name}</span>
+        <div className="max-w-7xl mx-auto min-h-[calc(100vh-7rem)] grid lg:grid-cols-[1.12fr_0.88fr] gap-12 items-center">
+          <div className="space-y-8">
+            <FadeUp>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-sm font-display font-semibold text-emerald-200">
+                  <span className="h-2 w-2 rounded-full bg-emerald-300 animate-pulse-slow" />
+                  Open to internships and full-time roles
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300">
+                  <MapPin size={15} />
+                  {data.location}
+                </span>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={100}>
+              <div>
+                <p className="mb-4 text-sm font-mono uppercase tracking-[0.28em] text-lime-200/80">Full Stack. AI. Cloud.</p>
+                <h1 className="max-w-4xl font-display text-5xl font-bold leading-[1.02] text-white md:text-7xl lg:text-8xl">
+                  Portfolio built around real projects, clean interfaces, and strong fundamentals.
                 </h1>
-              </FadeUp>
-
-              <FadeUp delay={200}>
-                <p className="font-display text-xl md:text-2xl text-slate-400 font-medium">
-                  {data.title}
-                </p>
-              </FadeUp>
-
-              <FadeUp delay={300}>
-                <p className="font-body text-slate-400 text-base md:text-lg leading-relaxed max-w-xl">
-                  {data.tagline}
-                </p>
-              </FadeUp>
-
-              <FadeUp delay={400}>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {topSkills.map(s => (
-                    <span key={s} className="tag">{s}</span>
-                  ))}
-                </div>
-              </FadeUp>
-
-              <FadeUp delay={500}>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Link to="/projects" className="btn-primary">
-                    View my work <ArrowRight size={16} />
-                  </Link>
-                  <Link to="/contact" className="btn-ghost">
-                    Get in touch
-                  </Link>
-                  <a href={data.social.github} target="_blank" rel="noreferrer"
-                    className="btn-ghost px-4">
-                    <Github size={18} />
-                  </a>
-                  <a href={data.social.linkedin} target="_blank" rel="noreferrer"
-                    className="btn-ghost px-4">
-                    <Linkedin size={18} />
-                  </a>
-                </div>
-              </FadeUp>
-            </div>
-
-            {/* Avatar card */}
-            <FadeUp delay={200} className="lg:w-80 w-full">
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-br from-sky-500/30 to-slate-800/0 rounded-3xl blur-xl" />
-                <div className="relative card p-8 text-center space-y-4">
-                  <div className="w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center text-4xl font-display font-bold text-white">
-                    BT
-                  </div>
-                  <div>
-                    <p className="font-display font-semibold text-white">{data.name}</p>
-                    <p className="text-slate-400 text-sm mt-1">{data.title}</p>
-                  </div>
-                  <div className="border-t border-slate-800 pt-4 grid grid-cols-3 gap-2 text-center">
-                    <div>
-                      <p className="text-sky-400 font-display font-bold text-lg">9.66</p>
-                      <p className="text-slate-500 text-xs">CGPA</p>
-                    </div>
-                    <div>
-                      <p className="text-sky-400 font-display font-bold text-lg">3+</p>
-                      <p className="text-slate-500 text-xs">Projects</p>
-                    </div>
-                    <div>
-                      <p className="text-sky-400 font-display font-bold text-lg">2</p>
-                      <p className="text-slate-500 text-xs">Internships</p>
-                    </div>
-                  </div>
-                  <a href="/Bhanu_Teja_Resume.pdf" className="btn-primary w-full justify-center text-sm py-2">
-                    <Download size={14} /> Download CV
-                  </a>
-                </div>
               </div>
             </FadeUp>
+
+            <FadeUp delay={200}>
+              <p className="max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
+                {data.name} is a {data.title.toLowerCase()} focused on MERN applications, AI/ML systems, cloud deployment, and consistent DSA problem solving.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={300}>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/projects" className="btn-primary">
+                  Explore projects <ArrowRight size={18} />
+                </Link>
+                <a href="/Bhanu_Teja_Resume.pdf" className="btn-ghost">
+                  <Download size={18} /> Resume
+                </a>
+                <a href={data.social.github} target="_blank" rel="noreferrer" className="icon-button" aria-label="GitHub">
+                  <Github size={20} />
+                </a>
+                <a href={data.social.linkedin} target="_blank" rel="noreferrer" className="icon-button" aria-label="LinkedIn">
+                  <Linkedin size={20} />
+                </a>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={400}>
+              <div className="grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+                {data.stats.map((stat) => (
+                  <div key={stat.label} className="metric-tile">
+                    <p className="font-display text-2xl font-bold text-white">{stat.value}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-lime-200">{stat.label}</p>
+                    <p className="mt-1 text-xs text-slate-500">{stat.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeUp>
+          </div>
+
+          <FadeUp delay={180} className="relative">
+            <div className="hero-panel">
+              <div className="profile-card-header">
+                <div className="profile-avatar">BT</div>
+                <div className="min-w-0">
+                  <p className="text-sm font-mono uppercase tracking-[0.22em] text-lime-200/80">Profile overview</p>
+                  <h2 className="mt-3 font-display text-3xl font-bold text-white">{data.name}</h2>
+                  <p className="mt-2 text-slate-400">{data.title}</p>
+                </div>
+              </div>
+
+              <div className="my-8 grid gap-3 sm:grid-cols-2">
+                <div className="profile-stat">
+                  <span>Current CGPA</span>
+                  <strong>9.66</strong>
+                </div>
+                <div className="profile-stat">
+                  <span>Problem solving</span>
+                  <strong>50+ days</strong>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {data.focus.map((item, index) => (
+                  <div key={item} className="profile-row">
+                    <div className="flex items-center gap-3">
+                      <span className="profile-index">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm font-semibold text-slate-200">{item}</span>
+                    </div>
+                    <BadgeCheck size={18} className="text-emerald-300" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      <section className="section-band">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeUp>
+            <div className="section-kicker">What I build</div>
+            <div className="section-title-row">
+              <h2 className="section-heading">Useful systems, not just screens</h2>
+              <p className="section-subtitle">I like projects where frontend polish, backend logic, and intelligent automation all meet in one product.</p>
+            </div>
+          </FadeUp>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {data.services.map((service, index) => {
+              const Icon = serviceIcons[index] || Rocket;
+              return (
+                <FadeUp key={service.title} delay={index * 90}>
+                  <div className="feature-panel">
+                    <div className="feature-icon"><Icon size={22} /></div>
+                    <h3>{service.title}</h3>
+                    <p>{service.desc}</p>
+                  </div>
+                </FadeUp>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="max-w-6xl mx-auto px-6 mt-24">
-        <FadeUp>
-          <div className="flex items-center justify-between mb-10">
-            <div>
-              <p className="text-sky-400 font-mono text-sm mb-2">// featured work</p>
-              <h2 className="section-heading">Projects</h2>
+      <section className="section-band">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeUp>
+            <div className="section-kicker">Featured work</div>
+            <div className="section-title-row">
+              <h2 className="section-heading">Projects with practical outcomes</h2>
+              <Link to="/projects" className="btn-ghost hidden md:inline-flex">
+                View all <ArrowRight size={16} />
+              </Link>
             </div>
-            <Link to="/projects" className="btn-ghost text-sm py-2 hidden md:flex">
-              All projects <ArrowRight size={15} />
-            </Link>
-          </div>
-        </FadeUp>
+          </FadeUp>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data.projects.map((p, i) => (
-            <FadeUp key={p.title} delay={i * 100}>
-              <div className={`card h-full flex flex-col group cursor-default ${p.highlight ? 'border-sky-500/40 bg-sky-950/20' : ''}`}>
-                {p.highlight && (
-                  <div className="flex items-center gap-1.5 mb-3">
-                    <Star size={12} className="text-sky-400 fill-sky-400" />
-                    <span className="text-sky-400 text-xs font-mono">Featured</span>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {featuredProjects.map((project, index) => (
+              <FadeUp key={project.title} delay={index * 100}>
+                <article className={`project-card ${project.highlight ? 'project-card-featured' : ''}`}>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="tag">{project.type}</span>
+                    {project.highlight && <Trophy size={18} className="text-amber-300" />}
                   </div>
-                )}
-                <h3 className="font-display font-semibold text-white text-base mb-2 group-hover:text-sky-400 transition-colors">
-                  {p.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">{p.description}</p>
-                <div className="flex flex-wrap gap-1.5 mt-auto pt-3 border-t border-slate-800">
-                  {p.tags.map(t => <span key={t} className="tag text-[10px] px-2 py-0.5">{t}</span>)}
-                </div>
-              </div>
-            </FadeUp>
-          ))}
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="impact-strip">
+                    <BarChart3 size={16} />
+                    <span>{project.impact}</span>
+                  </div>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                    {project.tags.map((tag) => <span key={tag} className="mini-tag">{tag}</span>)}
+                  </div>
+                </article>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Achievements */}
-      <section className="max-w-6xl mx-auto px-6 mt-24">
-        <FadeUp>
-          <p className="text-sky-400 font-mono text-sm mb-2">// recognition</p>
-          <h2 className="section-heading mb-10">Achievements</h2>
-        </FadeUp>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {data.achievements.map((a, i) => (
-            <FadeUp key={a.title} delay={i * 80}>
-              <div className="card text-center space-y-2 hover:scale-[1.02] transition-transform">
-                <div className="text-3xl">{a.icon}</div>
-                <p className="font-display font-semibold text-white text-sm">{a.title}</p>
-                <p className="text-slate-500 text-xs leading-relaxed">{a.desc}</p>
-              </div>
-            </FadeUp>
-          ))}
+      <section className="section-band">
+        <div className="max-w-7xl mx-auto px-6">
+          <FadeUp>
+            <div className="section-kicker">Coding profiles</div>
+            <div className="section-title-row">
+              <h2 className="section-heading">Problem solving proof</h2>
+              <p className="section-subtitle">Recruiters can quickly jump into coding profiles and see consistency beyond the portfolio UI.</p>
+            </div>
+          </FadeUp>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {data.codingProfiles.map((profile, index) => (
+              <FadeUp key={profile.platform} delay={index * 100}>
+                <a href={profile.url} target="_blank" rel="noreferrer" className="profile-panel group">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-mono text-lime-200">{profile.platform}</p>
+                      <h3>{profile.handle}</h3>
+                    </div>
+                    <ExternalLink size={18} className="text-slate-500 transition-colors group-hover:text-lime-200" />
+                  </div>
+                  <p className="profile-metric">{profile.metric}</p>
+                  <p className="text-sm leading-6 text-slate-400">{profile.note}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.tags.map((tag) => <span key={tag} className="mini-tag">{tag}</span>)}
+                  </div>
+                </a>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-6xl mx-auto px-6 mt-24">
+      <section className="px-6 py-24">
         <FadeUp>
-          <div className="relative rounded-3xl overflow-hidden border border-sky-500/20 bg-gradient-to-br from-sky-950/40 to-slate-900/40 p-10 md:p-16 text-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent pointer-events-none" />
-            <Zap className="mx-auto text-sky-400 mb-4" size={28} />
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Let's build something great together
-            </h2>
-            <p className="text-slate-400 mb-8 max-w-lg mx-auto font-body">
-              I'm actively looking for internships and full-time roles in Full Stack, Cloud, and AI development. Let's talk.
-            </p>
-            <Link to="/contact" className="btn-primary text-base px-8 py-3.5">
-              Get in touch <ArrowRight size={17} />
-            </Link>
+          <div className="max-w-7xl mx-auto overflow-hidden rounded-[2rem] border border-lime-300/20 bg-gradient-to-r from-lime-300/12 via-slate-900 to-cyan-300/10 p-8 md:p-12">
+            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <p className="section-kicker">Let us build</p>
+                <h2 className="mt-3 font-display text-3xl font-bold text-white md:text-5xl">Have an internship, project, or idea?</h2>
+                <p className="mt-4 max-w-2xl text-slate-300">I am ready to contribute across frontend, backend, cloud, and AI/ML work with strong fundamentals and a builder mindset.</p>
+              </div>
+              <Link to="/contact" className="btn-primary justify-center">
+                Contact me <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </FadeUp>
       </section>

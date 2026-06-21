@@ -6,40 +6,60 @@
   * { scroll-behavior: smooth; }
 
   body {
-    @apply bg-[#0a0a0f] text-slate-300 font-body antialiased;
+    @apply bg-[#080a0f] text-slate-300 font-body antialiased;
   }
 
   ::selection {
-    @apply bg-sky-500/30 text-sky-200;
+    @apply bg-lime-300/25 text-lime-100;
   }
 
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { @apply bg-slate-900; }
-  ::-webkit-scrollbar-thumb { @apply bg-sky-600 rounded-full; }
+  ::-webkit-scrollbar-track { @apply bg-[#080a0f]; }
+  ::-webkit-scrollbar-thumb { @apply bg-lime-300/60 rounded-full; }
 }
 
 @layer components {
   .section-heading {
-    @apply font-display text-3xl md:text-4xl font-bold text-white;
+    @apply font-display text-4xl md:text-5xl font-bold text-white leading-tight;
+  }
+  .section-kicker {
+    @apply text-sm font-mono uppercase tracking-[0.26em] text-lime-200/80;
+  }
+  .section-subtitle {
+    @apply max-w-2xl text-base md:text-lg leading-8 text-slate-400;
+  }
+  .section-title-row {
+    @apply flex flex-col gap-5 md:flex-row md:items-end md:justify-between;
+  }
+  .section-band {
+    @apply px-6 py-20 md:py-24;
   }
   .tag {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium
-           bg-sky-500/10 text-sky-400 border border-sky-500/20;
+           bg-lime-300/10 text-lime-100 border border-lime-300/20;
+  }
+  .mini-tag {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.05]
+           px-3 py-1 text-xs font-semibold text-slate-300;
   }
   .card {
     @apply bg-slate-900/60 border border-slate-800 rounded-2xl p-6
-           backdrop-blur-sm hover:border-sky-500/40 transition-all duration-300;
+           backdrop-blur-sm hover:border-lime-300/30 transition-all duration-300;
   }
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-sky-500 hover:bg-sky-400
-           text-white font-display font-semibold rounded-xl
-           transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/25
-           active:scale-95;
+    @apply inline-flex items-center gap-2 rounded-full bg-lime-300 px-6 py-3
+           font-display font-semibold text-slate-950 transition-all duration-200
+           hover:bg-white hover:shadow-lg hover:shadow-lime-300/20 active:scale-95;
   }
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-slate-700
-           hover:border-sky-500/60 text-slate-300 hover:text-sky-400
-           font-display font-semibold rounded-xl transition-all duration-200;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3
+           font-display font-semibold text-slate-300 transition-all duration-200
+           hover:border-lime-300/40 hover:bg-lime-300/10 hover:text-lime-100;
+  }
+  .icon-button {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10
+           text-slate-300 transition-all duration-200 hover:border-lime-300/40
+           hover:bg-lime-300/10 hover:text-lime-100;
   }
   .nav-link {
     @apply text-sm font-display font-medium text-slate-400 hover:text-white
@@ -47,6 +67,96 @@
   }
   .glow {
     filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.4));
+  }
+  .hero-panel {
+    @apply relative rounded-[1.75rem] border border-white/10 bg-[#0d1218]/90 p-6 md:p-8
+           shadow-2xl shadow-black/35 backdrop-blur-xl;
+  }
+  .hero-panel::before {
+    content: '';
+    @apply absolute -inset-px -z-10 rounded-[1.75rem] bg-gradient-to-br from-lime-300/25 via-transparent to-cyan-300/20 opacity-70;
+  }
+  .profile-card-header {
+    @apply flex items-start gap-5;
+  }
+  .profile-avatar {
+    @apply flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border border-lime-300/25
+           bg-lime-300/10 font-display text-2xl font-bold text-lime-100 shadow-lg shadow-black/20;
+  }
+  .profile-stat {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] p-4;
+  }
+  .profile-stat span {
+    @apply block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500;
+  }
+  .profile-stat strong {
+    @apply mt-2 block font-display text-2xl font-bold text-white;
+  }
+  .profile-row {
+    @apply flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3
+           transition-all duration-300 hover:border-lime-300/25 hover:bg-lime-300/10;
+  }
+  .profile-index {
+    @apply flex h-8 w-8 items-center justify-center rounded-xl bg-lime-300/10 text-lime-100;
+  }
+  .metric-tile {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm
+           transition-all duration-300 hover:-translate-y-1 hover:border-lime-300/25 hover:bg-lime-300/10;
+  }
+  .feature-panel {
+    @apply rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm
+           transition-all duration-300 hover:-translate-y-1 hover:border-lime-300/25 hover:bg-white/[0.07];
+  }
+  .feature-panel h3 {
+    @apply mt-5 font-display text-xl font-bold text-white;
+  }
+  .feature-panel p {
+    @apply mt-3 text-sm leading-6 text-slate-400;
+  }
+  .feature-icon {
+    @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-100
+           ring-1 ring-lime-300/20;
+  }
+  .project-card {
+    @apply flex min-h-[26rem] flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-6
+           transition-all duration-300 hover:-translate-y-1 hover:border-lime-300/25 hover:bg-white/[0.07];
+  }
+  .project-card-featured {
+    @apply border-lime-300/25 bg-lime-300/10;
+  }
+  .project-card h3 {
+    @apply mt-7 font-display text-2xl font-bold leading-tight text-white;
+  }
+  .project-card p {
+    @apply mt-4 text-sm leading-7 text-slate-400;
+  }
+  .impact-strip {
+    @apply mt-5 flex items-center gap-2 rounded-2xl border border-emerald-300/15
+           bg-emerald-300/10 px-4 py-3 text-sm font-semibold text-emerald-100;
+  }
+  .profile-panel {
+    @apply block h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6
+           transition-all duration-300 hover:-translate-y-1 hover:border-lime-300/25 hover:bg-lime-300/10;
+  }
+  .profile-panel h3 {
+    @apply mt-2 font-display text-2xl font-bold text-white;
+  }
+  .profile-metric {
+    @apply my-5 inline-flex rounded-full bg-emerald-300/10 px-4 py-2 text-sm font-bold text-emerald-100
+           ring-1 ring-emerald-300/20;
+  }
+  .work-row {
+    @apply grid gap-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8 lg:grid-cols-[1fr_auto]
+           transition-all duration-300 hover:border-lime-300/25 hover:bg-white/[0.07];
+  }
+  .work-row-featured {
+    @apply border-lime-300/25 bg-lime-300/10;
+  }
+  .timeline-panel {
+    @apply grid gap-6 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8 lg:grid-cols-[0.7fr_1.3fr];
+  }
+  .education-row {
+    @apply grid gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-5 lg:grid-cols-[1fr_auto] lg:items-center;
   }
 }
 
@@ -60,8 +170,25 @@
   opacity: 0.4;
 }
 
+.hero-surface {
+  background:
+    linear-gradient(135deg, rgba(216, 255, 122, 0.08), transparent 28%),
+    linear-gradient(225deg, rgba(103, 232, 249, 0.08), transparent 32%),
+    linear-gradient(180deg, #080a0f 0%, #0b1015 52%, #080a0f 100%);
+}
+
+.hero-weave {
+  background-image:
+    linear-gradient(115deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 54px),
+    linear-gradient(90deg, rgba(216,255,122,0.055) 0 1px, transparent 1px 92px),
+    linear-gradient(0deg, rgba(103,232,249,0.035) 0 1px, transparent 1px 92px);
+  background-size: 88px 88px, 92px 92px, 92px 92px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.96), rgba(0,0,0,0.35) 78%, transparent);
+  animation: weaveDrift 18s linear infinite;
+}
+
 .gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 50%, #38bdf8 100%);
+  background: linear-gradient(135deg, #fff 0%, #a7f3d0 45%, #67e8f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -77,7 +204,12 @@
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(216,255,122,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103,232,249,0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@keyframes weaveDrift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 88px 88px, -92px 0, 0 -92px; }
 }

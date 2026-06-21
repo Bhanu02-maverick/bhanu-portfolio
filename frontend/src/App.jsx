@@ -10,8 +10,8 @@ import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] noise-bg relative">
-      <div className="grid-bg fixed inset-0 pointer-events-none z-0 opacity-50" />
+    <div className="min-h-screen bg-[#080a0f] noise-bg relative">
+      <div className="grid-bg fixed inset-0 pointer-events-none z-0 opacity-45" />
       <div className="relative z-10">
         <Navbar />
         <ScrollToTop />

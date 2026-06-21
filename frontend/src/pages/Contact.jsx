@@ -1,225 +1,43 @@
-// import { useState } from 'react';
-// import toast from 'react-hot-toast';
-// import { data } from '../data';
-// import { useReveal } from '../hooks/useReveal';
-// import { Mail, Phone, MapPin, Github, Linkedin, Send, Loader2 } from 'lucide-react';
-
-// function FadeUp({ children, delay = 0, className = '' }) {
-//   const { ref, inView } = useReveal();
-//   return (
-//     <div ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
-//       style={{ transitionDelay: `${delay}ms` }}>
-//       {children}
-//     </div>
-//   );
-// }
-
-// const inputClass = `w-full bg-slate-900/60 border border-slate-700 hover:border-slate-600 focus:border-sky-500
-//   rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 text-sm font-body
-//   outline-none transition-colors duration-200 focus:ring-1 focus:ring-sky-500/40`;
-
-// export default function Contact() {
-//   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-//   const [loading, setLoading] = useState(false);
-//   const [sent, setSent] = useState(false);
-
-//   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-
-//   const handleSubmit = async e => {
-//     e.preventDefault();
-//     if (!form.name || !form.email || !form.subject || !form.message) {
-//       toast.error('Please fill in all fields.');
-//       return;
-//     }
-//     setLoading(true);
-//     try {
-//       const res = await fetch('https://bhanu-portfolio-1vai.onrender.com/api/contact', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(form),
-//       });
-//       const json = await res.json();
-//       if (json.success) {
-//         toast.success('Message sent! I\'ll reply within 1–2 days.');
-//         setSent(true);
-//         setForm({ name: '', email: '', subject: '', message: '' });
-//       } else {
-//         toast.error(json.message || 'Something went wrong.');
-//       }
-//     } catch {
-//       toast.error('Network error. Please try again.');
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <main className="pt-28 pb-16 max-w-6xl mx-auto px-6">
-//       <FadeUp>
-//         <p className="text-sky-400 font-mono text-sm mb-2">// get in touch</p>
-//         <h1 className="section-heading mb-4">Contact me</h1>
-//         <p className="text-slate-400 font-body mb-14 max-w-xl">
-//           Whether it's a job opportunity, a collaboration, or just a hello — I'd love to hear from you. I'll get back within 1–2 business days.
-//         </p>
-//       </FadeUp>
-
-//       <div className="grid lg:grid-cols-2 gap-12">
-//         {/* Info */}
-//         <FadeUp>
-//           <div className="space-y-6">
-//             <div className="card space-y-5">
-//               <a href={`mailto:${data.email}`}
-//                 className="flex items-center gap-4 group hover:text-sky-400 transition-colors">
-//                 <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-//                   <Mail size={18} className="text-sky-400" />
-//                 </div>
-//                 <div>
-//                   <p className="text-slate-500 text-xs mb-0.5">Email</p>
-//                   <p className="text-slate-200 text-sm group-hover:text-sky-400 transition-colors">{data.email}</p>
-//                 </div>
-//               </a>
-
-//               <div className="flex items-center gap-4">
-//                 <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-//                   <Phone size={18} className="text-sky-400" />
-//                 </div>
-//                 <div>
-//                   <p className="text-slate-500 text-xs mb-0.5">Phone</p>
-//                   <p className="text-slate-200 text-sm">{data.phone}</p>
-//                 </div>
-//               </div>
-
-//               <div className="flex items-center gap-4">
-//                 <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-//                   <MapPin size={18} className="text-sky-400" />
-//                 </div>
-//                 <div>
-//                   <p className="text-slate-500 text-xs mb-0.5">Location</p>
-//                   <p className="text-slate-200 text-sm">{data.location}</p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="card">
-//               <p className="font-mono text-sky-400 text-xs mb-4">// find me online</p>
-//               <div className="flex flex-col gap-3">
-//                 <a href={data.social.github} target="_blank" rel="noreferrer"
-//                   className="flex items-center gap-3 text-slate-400 hover:text-sky-400 transition-colors text-sm">
-//                   <Github size={16} /> github.com/Bhanu02-maverick
-//                 </a>
-//                 <a href={data.social.linkedin} target="_blank" rel="noreferrer"
-//                   className="flex items-center gap-3 text-slate-400 hover:text-sky-400 transition-colors text-sm">
-//                   <Linkedin size={16} /> linkedin.com/in/M-BHANU-TEJA
-//                 </a>
-//               </div>
-//             </div>
-
-//             <div className="card bg-green-950/20 border-green-500/20">
-//               <div className="flex items-center gap-2 mb-2">
-//                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-slow" />
-//                 <span className="text-green-400 text-sm font-display font-medium">Available for work</span>
-//               </div>
-//               <p className="text-slate-400 text-sm font-body">
-//                 Currently seeking internship and full-time roles in Full Stack, Cloud, or AI/ML development. Remote friendly.
-//               </p>
-//             </div>
-//           </div>
-//         </FadeUp>
-
-//         {/* Form */}
-//         <FadeUp delay={150}>
-//           {sent ? (
-//             <div className="card text-center py-16 space-y-4">
-//               <div className="text-5xl">🎉</div>
-//               <h3 className="font-display font-bold text-white text-xl">Message sent!</h3>
-//               <p className="text-slate-400 font-body">Thanks for reaching out. I'll reply to <span className="text-sky-400">{form.email || 'your email'}</span> within 1–2 days.</p>
-//               <button onClick={() => setSent(false)} className="btn-ghost text-sm py-2 mt-4">Send another</button>
-//             </div>
-//           ) : (
-//             <form onSubmit={handleSubmit} className="card space-y-4">
-//               <p className="font-mono text-sky-400 text-xs mb-2">// send a message</p>
-
-//               <div className="grid sm:grid-cols-2 gap-4">
-//                 <div>
-//                   <label className="block text-slate-400 text-xs mb-1.5 font-body">Your name *</label>
-//                   <input type="text" name="name" value={form.name} onChange={handleChange}
-//                     placeholder="Ravi Kumar" className={inputClass} required />
-//                 </div>
-//                 <div>
-//                   <label className="block text-slate-400 text-xs mb-1.5 font-body">Email address *</label>
-//                   <input type="email" name="email" value={form.email} onChange={handleChange}
-//                     placeholder="ravi@company.com" className={inputClass} required />
-//                 </div>
-//               </div>
-
-//               <div>
-//                 <label className="block text-slate-400 text-xs mb-1.5 font-body">Subject *</label>
-//                 <input type="text" name="subject" value={form.subject} onChange={handleChange}
-//                   placeholder="Job opportunity / Collaboration / Hello" className={inputClass} required />
-//               </div>
-
-//               <div>
-//                 <label className="block text-slate-400 text-xs mb-1.5 font-body">Message *</label>
-//                 <textarea name="message" value={form.message} onChange={handleChange}
-//                   rows={5} placeholder="Tell me about the opportunity or what's on your mind..."
-//                   className={`${inputClass} resize-none`} required />
-//               </div>
-
-//               <button type="submit" disabled={loading}
-//                 className="btn-primary w-full justify-center py-3.5 disabled:opacity-60 disabled:cursor-not-allowed">
-//                 {loading ? (
-//                   <><Loader2 size={16} className="animate-spin" /> Sending...</>
-//                 ) : (
-//                   <><Send size={16} /> Send message</>
-//                 )}
-//               </button>
-
-//               <p className="text-slate-600 text-xs text-center font-body">
-//                 You'll receive an auto-reply confirming your message.
-//               </p>
-//             </form>
-//           )}
-//         </FadeUp>
-//       </div>
-//     </main>
-//   );
-// }
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Github, Linkedin, Loader2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { data } from '../data';
 import { useReveal } from '../hooks/useReveal';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, Loader2 } from 'lucide-react';
 
 function FadeUp({ children, delay = 0, className = '' }) {
   const { ref, inView } = useReveal();
   return (
-    <div ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}>
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
 }
 
-const inputClass = `w-full bg-slate-900/60 border border-slate-700 hover:border-slate-600 focus:border-sky-500
-  rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 text-sm font-body
-  outline-none transition-colors duration-200 focus:ring-1 focus:ring-sky-500/40`;
+const inputClass = `w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3
+  text-sm text-slate-200 placeholder-slate-500 outline-none transition-colors duration-200
+  hover:border-white/20 focus:border-lime-300/60 focus:ring-2 focus:ring-lime-300/15`;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (event) => setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!form.name || !form.email || !form.subject || !form.message) {
       toast.error('Please fill in all fields.');
       return;
     }
+
     setLoading(true);
     try {
-      const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -231,147 +49,133 @@ export default function Contact() {
             from_email: form.email,
             subject: form.subject,
             message: form.message,
-            to_email: 'bhanuteja766192@gmail.com',
+            to_email: data.email,
           },
         }),
       });
 
-      if (res.ok) {
+      if (response.ok) {
         toast.success("Message sent! I'll reply within 1-2 days.");
         setSent(true);
         setForm({ name: '', email: '', subject: '', message: '' });
       } else {
-        const err = await res.text();
-        console.error('EmailJS error:', err);
         toast.error('Something went wrong. Please try again.');
       }
-    } catch (err) {
-      console.error('Network error:', err);
+    } catch {
       toast.error('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  const contactItems = [
+    { icon: Mail, label: 'Email', value: data.email, href: `mailto:${data.email}` },
+    { icon: Phone, label: 'Phone', value: data.phone },
+    { icon: MapPin, label: 'Location', value: data.location },
+  ];
+
   return (
-    <main className="pt-28 pb-16 max-w-6xl mx-auto px-6">
-      <FadeUp>
-        <p className="text-sky-400 font-mono text-sm mb-2">// get in touch</p>
-        <h1 className="section-heading mb-4">Contact me</h1>
-        <p className="text-slate-400 font-body mb-14 max-w-xl">
-          Whether it's a job opportunity, a collaboration, or just a hello — I'd love to hear from you. I'll get back within 1–2 business days.
-        </p>
-      </FadeUp>
-
-      <div className="grid lg:grid-cols-2 gap-12">
+    <main className="pt-32 pb-20">
+      <section className="max-w-7xl mx-auto px-6">
         <FadeUp>
-          <div className="space-y-6">
-            <div className="card space-y-5">
-              <a href={`mailto:${data.email}`}
-                className="flex items-center gap-4 group hover:text-sky-400 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-                  <Mail size={18} className="text-sky-400" />
-                </div>
-                <div>
-                  <p className="text-slate-500 text-xs mb-0.5">Email</p>
-                  <p className="text-slate-200 text-sm group-hover:text-sky-400 transition-colors">{data.email}</p>
-                </div>
-              </a>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-                  <Phone size={18} className="text-sky-400" />
-                </div>
-                <div>
-                  <p className="text-slate-500 text-xs mb-0.5">Phone</p>
-                  <p className="text-slate-200 text-sm">{data.phone}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-                  <MapPin size={18} className="text-sky-400" />
-                </div>
-                <div>
-                  <p className="text-slate-500 text-xs mb-0.5">Location</p>
-                  <p className="text-slate-200 text-sm">{data.location}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card">
-              <p className="font-mono text-sky-400 text-xs mb-4">// find me online</p>
-              <div className="flex flex-col gap-3">
-                <a href={data.social.github} target="_blank" rel="noreferrer"
-                  className="flex items-center gap-3 text-slate-400 hover:text-sky-400 transition-colors text-sm">
-                  <Github size={16} /> github.com/Bhanu02-maverick
-                </a>
-                <a href={data.social.linkedin} target="_blank" rel="noreferrer"
-                  className="flex items-center gap-3 text-slate-400 hover:text-sky-400 transition-colors text-sm">
-                  <Linkedin size={16} /> linkedin.com/in/M-BHANU-TEJA
-                </a>
-              </div>
-            </div>
-
-            <div className="card bg-green-950/20 border-green-500/20">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-slow" />
-                <span className="text-green-400 text-sm font-display font-medium">Available for work</span>
-              </div>
-              <p className="text-slate-400 text-sm font-body">
-                Currently seeking internship and full-time roles in Full Stack, Cloud, or AI/ML development. Remote friendly.
+          <div className="section-kicker">Contact</div>
+          <div className="section-title-row">
+            <div>
+              <h1 className="section-heading">Let us build something useful</h1>
+              <p className="section-subtitle mt-4">
+                Reach out for internships, full-stack projects, AI/ML work, collaborations, or a quick portfolio conversation.
               </p>
+            </div>
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-100">
+              <span className="h-2 w-2 rounded-full bg-emerald-300 animate-pulse-slow" />
+              Available now
             </div>
           </div>
         </FadeUp>
 
-        <FadeUp delay={150}>
-          {sent ? (
-            <div className="card text-center py-16 space-y-4">
-              <div className="text-5xl">🎉</div>
-              <h3 className="font-display font-bold text-white text-xl">Message sent!</h3>
-              <p className="text-slate-400 font-body">Thanks for reaching out. I'll reply within 1–2 days.</p>
-              <button onClick={() => setSent(false)} className="btn-ghost text-sm py-2 mt-4">Send another</button>
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <FadeUp>
+            <div className="space-y-5">
+              <div className="feature-panel">
+                <p className="text-sm font-mono text-lime-200">Direct details</p>
+                <div className="mt-6 space-y-4">
+                  {contactItems.map((item) => {
+                    const Icon = item.icon;
+                    const content = (
+                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/15 p-4 transition-colors hover:border-lime-300/25">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-lime-300/10 text-lime-100">
+                          <Icon size={19} />
+                        </span>
+                        <div>
+                          <p className="text-xs text-slate-500">{item.label}</p>
+                          <p className="mt-1 break-all text-sm font-semibold text-slate-200">{item.value}</p>
+                        </div>
+                      </div>
+                    );
+
+                    return item.href ? (
+                      <a key={item.label} href={item.href}>{content}</a>
+                    ) : (
+                      <div key={item.label}>{content}</div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="profile-panel">
+                <p className="text-sm font-mono text-lime-200">Online profiles</p>
+                <div className="mt-5 flex flex-col gap-3">
+                  <a href={data.social.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm font-semibold text-slate-300 transition-colors hover:text-lime-100">
+                    <Github size={17} /> github.com/Bhanu02-maverick
+                  </a>
+                  <a href={data.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm font-semibold text-slate-300 transition-colors hover:text-lime-100">
+                    <Linkedin size={17} /> linkedin.com/in/M-BHANU-TEJA
+                  </a>
+                </div>
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="card space-y-4">
-              <p className="font-mono text-sky-400 text-xs mb-2">// send a message</p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-slate-400 text-xs mb-1.5 font-body">Your name *</label>
-                  <input type="text" name="name" value={form.name} onChange={handleChange}
-                    placeholder="Ravi Kumar" className={inputClass} required />
+          </FadeUp>
+
+          <FadeUp delay={120}>
+            {sent ? (
+              <div className="feature-panel flex min-h-[30rem] flex-col items-center justify-center text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-300/10 text-emerald-100 ring-1 ring-emerald-300/20">
+                  <Send size={26} />
                 </div>
-                <div>
-                  <label className="block text-slate-400 text-xs mb-1.5 font-body">Email address *</label>
-                  <input type="email" name="email" value={form.email} onChange={handleChange}
-                    placeholder="ravi@company.com" className={inputClass} required />
+                <h2 className="mt-6 font-display text-3xl font-bold text-white">Message sent</h2>
+                <p className="mt-3 max-w-md text-slate-400">Thanks for reaching out. I will reply within 1-2 days.</p>
+                <button onClick={() => setSent(false)} className="btn-ghost mt-8" type="button">Send another</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="feature-panel space-y-5">
+                <p className="text-sm font-mono text-lime-200">Send a message</p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-semibold text-slate-400">Your name</span>
+                    <input name="name" value={form.name} onChange={handleChange} placeholder="Your name" className={inputClass} required />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-semibold text-slate-400">Email address</span>
+                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@company.com" className={inputClass} required />
+                  </label>
                 </div>
-              </div>
-              <div>
-                <label className="block text-slate-400 text-xs mb-1.5 font-body">Subject *</label>
-                <input type="text" name="subject" value={form.subject} onChange={handleChange}
-                  placeholder="Job opportunity / Collaboration / Hello" className={inputClass} required />
-              </div>
-              <div>
-                <label className="block text-slate-400 text-xs mb-1.5 font-body">Message *</label>
-                <textarea name="message" value={form.message} onChange={handleChange}
-                  rows={5} placeholder="Tell me about the opportunity or what's on your mind..."
-                  className={`${inputClass} resize-none`} required />
-              </div>
-              <button type="submit" disabled={loading}
-                className="btn-primary w-full justify-center py-3.5 disabled:opacity-60 disabled:cursor-not-allowed">
-                {loading ? (
-                  <><Loader2 size={16} className="animate-spin" /> Sending...</>
-                ) : (
-                  <><Send size={16} /> Send message</>
-                )}
-              </button>
-              <p className="text-slate-600 text-xs text-center font-body">
-                Powered by EmailJS · No data stored
-              </p>
-            </form>
-          )}
-        </FadeUp>
-      </div>
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-slate-400">Subject</span>
+                  <input name="subject" value={form.subject} onChange={handleChange} placeholder="Internship / Project / Collaboration" className={inputClass} required />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-slate-400">Message</span>
+                  <textarea name="message" value={form.message} onChange={handleChange} rows={6} placeholder="Tell me what you are working on..." className={`${inputClass} resize-none`} required />
+                </label>
+                <button type="submit" disabled={loading} className="btn-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60">
+                  {loading ? <><Loader2 size={17} className="animate-spin" /> Sending...</> : <><Send size={17} /> Send message</>}
+                </button>
+                <p className="text-center text-xs text-slate-600">Powered by EmailJS. No data stored in this app.</p>
+              </form>
+            )}
+          </FadeUp>
+        </div>
+      </section>
     </main>
   );
 }
